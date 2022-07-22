@@ -17,6 +17,6 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.2.2
         with:
-          cache-read-only: ${{ github.ref != 'refs/heads/release/develop' }}
+          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/release/develop' }}
       - name: Build with Gradle
         run: ./gradlew assembleDebug
