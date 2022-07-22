@@ -21,6 +21,6 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.2.2
         with:
-          cache-read-only:  ${{ github.head_ref != 'main' && github.ref != 'develop' }}
+          cache-read-only:  ${{ github.head_ref != 'main' &&  github.head_ref != 'develop' }}
       - name: Build with Gradle
         run: ./gradlew build --dry-run
