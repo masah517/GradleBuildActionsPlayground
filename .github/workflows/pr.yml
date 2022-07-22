@@ -12,9 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup Gradle
-          uses: gradle/gradle-build-action@v2.2.2
-          with:
-            cache-read-only: ${{ github.ref != 'refs/heads/develop' }}
+        uses: gradle/gradle-build-action@v2.2.2
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/develop' }}
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
