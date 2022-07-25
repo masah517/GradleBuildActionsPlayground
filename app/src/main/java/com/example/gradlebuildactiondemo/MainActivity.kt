@@ -8,6 +8,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        print("checkout and work on ver7.0.0")
+        print("checkout and work on ver7.0.0. More text here")
     }
 }
