@@ -1,0 +1,35 @@
+name: Push Android CI
+
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+
+env:
+  GRADLE_BUILD_ACTION_CACHE_DEBUG_ENABLED: true
+
+jobs:
+
+  buildDebugApk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Branch Name Test
+        run: echo "${{github.ref_name}} ${{ github.ref_name != 'main' &&  github.ref_name != 'develop' && !startsWith(github.ref_name,'release/ver')}}  ${{startsWith(github.ref_name,'release/ver')}}"
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2.2.2
+        with:
+          cache-read-only: ${{ github.ref_name != 'main' &&  github.ref_name != 'develop' && !startsWith(github.ref_name,'release/ver')}}
+      - name: Build with Gradle
+        run: ./gradlew build --dry-run
+
+      - name: Upload build reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-reports
+          path: build/reports/
