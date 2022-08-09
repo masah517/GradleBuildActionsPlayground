@@ -5,6 +5,9 @@ on:
     paths-ignore:
       - '**.md'
 
+env:
+  GRADLE_BUILD_ACTION_CACHE_DEBUG_ENABLED: true
+
 jobs:
 
   buildDebugApk:
@@ -21,6 +24,6 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.2.2
         with:
-          cache-read-only:  ${{ github.ref_name != 'main' &&  github.ref_name != 'develop' && !startsWith(github.ref_name,'release/ver')}}
+          cache-read-only: ${{ github.ref_name != 'main' &&  github.ref_name != 'develop' && !startsWith(github.ref_name,'release/ver')}}
       - name: Build with Gradle
         run: ./gradlew build --dry-run
